@@ -11,6 +11,7 @@ export class Search extends Component {
         searchUsers: PropTypes.func.isRequired,
         clearUsers: PropTypes.func.isRequired,
         showClear: PropTypes.bool.isRequired,
+        setAlert: PropTypes.func.isRequired
     }
     // When we change the text that is typed in the search bar
     onchange = e => 
@@ -19,10 +20,18 @@ export class Search extends Component {
     onSubmit = (e) => {
         // Preventing the default behavior
     e.preventDefault()
+
+    // Alert if there is nothing in the search bar
+    if(this.state.text ==='') {
+        this.props.setAlert('Please enter a name...', 'light')
+    } else {
     // searching for the user that was typed in the search bar
     this.props.searchUsers(this.state.text)
     // clearing the search bar
     this.setState({text: ''})
+    }
+    
+    
 
  }  
     render() {
