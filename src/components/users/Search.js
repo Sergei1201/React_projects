@@ -9,6 +9,8 @@ export class Search extends Component {
 
     static propTypes = {
         searchUsers: PropTypes.func.isRequired,
+        clearUsers: PropTypes.func.isRequired,
+        showClear: PropTypes.bool.isRequired,
     }
     // When we change the text that is typed in the search bar
     onchange = e => 
@@ -24,6 +26,7 @@ export class Search extends Component {
 
  }  
     render() {
+        const {clearUsers, showClear} = this.props;
         return (
             <div>
 
@@ -36,6 +39,10 @@ export class Search extends Component {
                             />    
                     <input type='submit' value = 'Search' className = 'btn btn-dark btn-block' />
                 </form>
+               {showClear && <button className="btn btn-light btn-block" onClick = {clearUsers}>Clear</button>} 
+                
+                
+                
                 
             </div>
         )
