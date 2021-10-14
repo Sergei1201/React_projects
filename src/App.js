@@ -7,6 +7,7 @@ import User from './components/users/User';
 import Search from './components/users/Search';
 import Alert from './components/layout/Alert';
 import { About } from './components/pages/About';
+import GithubState from './context/github/GithubState';
 import './App.css';
 import axios from 'axios';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
