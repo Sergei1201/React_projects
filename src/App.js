@@ -8,6 +8,7 @@ import Search from './components/users/Search';
 import Alert from './components/layout/Alert';
 import { About } from './components/pages/About';
 import GithubState from './context/github/GithubState';
+import githubContext from './context/github/githubContext';
 import './App.css';
 import axios from 'axios';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
@@ -80,6 +81,7 @@ const App = () =>  {
    
     return (
 
+      <GithubState>
       <Router> 
 
          
@@ -121,6 +123,7 @@ const App = () =>  {
        
     
      </Router>
+     </GithubState>
 
       
         
