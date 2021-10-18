@@ -8,7 +8,6 @@ import Search from './components/users/Search';
 import Alert from './components/layout/Alert';
 import { About } from './components/pages/About';
 import GithubState from './context/github/GithubState';
-import githubContext from './context/github/githubContext';
 import './App.css';
 import axios from 'axios';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
@@ -22,8 +21,7 @@ const App = () =>  {
   //   loading: false,
   //   alert: null
   // }
- const [users, setUsers] = useState([])
- const [user, setUser] = useState({})
+
  const [repos, setRepos] = useState([])
  const [loading, setLoading] = useState(false)
  const [alert, setAlert] = useState(null)
@@ -33,24 +31,9 @@ const App = () =>  {
   // this.setState({users: res.data, loading: false})
   // }
 
-   const searchUsers = async text => {
-    setLoading(true)
-    const res = await axios.get(`https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)
-    // setUsers({users: res.data.items, loading: false})
-    setUsers(res.data.items)
-    setLoading(false)
-
-
-  }
+   
 
   // Getting a single GitHub user
-   const getUser = async username => {
-    setLoading(true)
-    const res = await axios.get(`https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)
-    // this.setState({user: res.data, loading: false})
-    setUser(res.data)
-    setLoading(false)
-  }
 
   // Getting user's repos
     const getUserRepos = async username => {
@@ -62,22 +45,19 @@ const App = () =>  {
   }
 
   // Clear users from state
-  const clearUsers = () => {
-    setUsers([])
-    setLoading(false)
-  }
-  //this.setState({users: [], loading: false})
-
-
-  // Show an alert if there's nothing in the search bar
   const showAlert = (msg, type) => {
     setAlert(msg, type)
     setTimeout(() => setAlert(null), 5000)
   }
+  
+  //this.setState({users: [], loading: false})
+
+
+  // Show an alert if there's nothing in the search bar
+ 
  
     //const {loading, users, alert, user, repos} = this.state;
     
-  
    
     return (
 
@@ -97,14 +77,15 @@ const App = () =>  {
             <Route exact path = '/' render = {props =>(
           <Fragment>
 
-              <Search searchUsers ={searchUsers} clearUsers = {clearUsers} showClear ={(users.length) > 0 ? true : false} setAlert = {showAlert} />
-              <Users loading = {loading} users = {users} />
+              <Search //clearUsers = {clearUsers} showClear ={(users.length) > 0 ? true : false}
+               setAlert = {showAlert} />
+              <Users />
       
           </Fragment>
             )}/>
             <Route exact path = '/about' component = {About} />
             <Route exact path = '/user/:login' render = {props => (
-            <User {...props} getUser = {getUser} getUserRepos = {getUserRepos} user = {user} loading = {loading}
+            <User {...props}  getUserRepos = {getUserRepos} loading = {loading}
             repos = {repos} />
             )} />
           </Switch> 
@@ -131,7 +112,6 @@ const App = () =>  {
       
     );
 
- 
-}
+            }
 
 export default App;
