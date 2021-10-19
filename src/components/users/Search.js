@@ -2,10 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { useState, useContext } from 'react'
 import GithubContext from '../../context/github/githubContext'
+import AlertContext from '../../context/alert/alertContext'
 
 
-const Search = ({setAlert }) => {
+const Search = () => {
     const githubContext = useContext(GithubContext)
+    const alertContext = useContext(AlertContext)
     // state = {
     //     text: ''
     // }
@@ -20,7 +22,7 @@ const Search = ({setAlert }) => {
 
     // Alert if there is nothing in the search bar
     if(text ==='') {
-        setAlert('Please enter a name...', 'light')
+        alertContext.setAlert('Please enter a name...', 'light')
     } else {
     // searching for the user that was typed in the search bar
     githubContext.searchUsers(text)
@@ -51,9 +53,6 @@ const Search = ({setAlert }) => {
             </div>
         )
     
-}
-Search.propTypes = {
-    setAlert: PropTypes.func.isRequired
 }
 
 export default Search
