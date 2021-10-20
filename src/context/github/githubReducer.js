@@ -3,7 +3,8 @@ import {
     SET_LOADING,
     CLEAR_USERS,
     GET_USER,
-    GET_REPOS
+    GET_REPOS,
+    SET_ALERT
 
 } from '../types'
 export default function (state, action) {
@@ -38,8 +39,6 @@ export default function (state, action) {
                 loading: false
 
             }
-
-       
         default:
             return state
 
